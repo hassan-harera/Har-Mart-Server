@@ -2,14 +2,16 @@ package com.example.el3atar.pojo;
 
 
 import com.example.el3atar.converter.DateTimeConverter;
+import com.example.el3atar.serializer.DateTimeSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.joda.time.DateTime;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import javax.persistence.*;
 
 @Entity
 public class Product {
     @Id()
+    @GeneratedValue
     @Column(name = "product_id")
     Integer productId;
     @Column(name = "product_name")
@@ -22,11 +24,10 @@ public class Product {
     String unit;
     @Column(name = "price")
     Double price;
-
-//    @Ignor
-//    @Convert(converter = DateTimeConverter.class)
-//    @Column(name = "date_added")
-    DateTime addingTime;
+    @Convert(converter = DateTimeConverter.class)
+//    @JsonSerialize(using = DateTimeSerializer.class)
+    @Column(name = "date_added")
+    String addingTime;
 
     public Integer getProductId() {
         return productId;
@@ -76,11 +77,11 @@ public class Product {
         this.price = price;
     }
 
-    public DateTime getAddingTime() {
+    public String getAddingTime() {
         return addingTime;
     }
 
-    public void setAddingTime(DateTime addingTime) {
+    public void setAddingTime(String addingTime) {
         this.addingTime = addingTime;
     }
 }
