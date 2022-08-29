@@ -2,6 +2,7 @@ package com.example.ecommerce.service
 
 import com.example.ecommerce.pojo.Product
 import com.example.ecommerce.repostory.ProductRepository
+import com.harera.product.service.ProductService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service

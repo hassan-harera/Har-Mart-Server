@@ -1,8 +1,8 @@
 package com.harera.product.controller;
 
 
-import com.example.ecommerce.pojo.Product;
 import com.example.ecommerce.service.ProductServiceImpl;
+import com.harera.product.entity.Product;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

@@ -1,6 +1,6 @@
-package com.example.ecommerce.service
+package com.harera.product.service
 
-import com.example.ecommerce.pojo.Product
+import com.harera.product.entity.Product
 import java.util.*
 
 

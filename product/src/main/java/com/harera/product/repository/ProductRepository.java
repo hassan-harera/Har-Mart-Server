@@ -1,7 +1,7 @@
 package com.harera.product.repository;
 
 
-import com.example.ecommerce.pojo.Product;
+import com.harera.product.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
