@@ -1,18 +1,16 @@
-package com.example.ecommerce.service
+package com.harea.offer.service
 
-import com.example.ecommerce.pojo.Offer
-import com.example.ecommerce.repostory.OfferRepository
-import org.springframework.beans.factory.annotation.Autowired
+import com.harea.offer.entity.Offer
+import com.harea.offer.repository.OfferRepository
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import java.util.*
 
 
-@Service("offerService")
-class OfferServiceImpl : OfferService {
-
-    @Autowired
-    lateinit var offerRepository : OfferRepository
+@Service
+class OfferServiceImpl(
+    private var offerRepository : OfferRepository,
+) : OfferService {
 
     override fun getOffer(offerId: Int): Optional<Offer> {
         return offerRepository.findById(offerId)

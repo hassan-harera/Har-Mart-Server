@@ -1,12 +1,12 @@
-package com.example.ecommerce.service
+package com.harea.offer.service
 
-import com.example.ecommerce.pojo.OffersGroup
-import com.example.ecommerce.repostory.OffersGroupRepository
+import com.harea.offer.entity.OffersGroup
+import com.harea.offer.repository.OffersGroupRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 
-@Service("offersGroupService")
+@Service
 class OffersGroupServiceImpl : OffersGroupService {
 
     @Autowired

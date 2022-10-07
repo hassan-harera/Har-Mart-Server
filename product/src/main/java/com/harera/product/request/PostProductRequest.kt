@@ -1,11 +1,8 @@
-package com.example.ecommerce.request
+package com.harera.product.request
 
-data class ProductRequest(
+data class PostProductRequest(
     val productName: String,
-    val amount: Double,
-    val unit: String,
+    val unitId: Int,
     val price: Double,
-    val categoryName: String,
-
-) {
-}
+    val categoryId: Int,
+)

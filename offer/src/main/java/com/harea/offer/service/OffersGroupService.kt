@@ -1,6 +1,6 @@
-package com.example.ecommerce.service
+package com.harea.offer.service
 
-import com.example.ecommerce.pojo.OffersGroup
+import com.harea.offer.entity.OffersGroup
 
 
 interface OffersGroupService {

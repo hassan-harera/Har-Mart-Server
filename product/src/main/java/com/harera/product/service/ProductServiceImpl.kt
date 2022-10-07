@@ -1,29 +1,44 @@
-package com.example.ecommerce.service
+package com.harera.product.service
 
-import com.example.ecommerce.pojo.Product
-import com.example.ecommerce.repostory.ProductRepository
-import com.harera.product.service.ProductService
-import org.springframework.beans.factory.annotation.Autowired
+import com.harera.product.dto.Product
+import com.harera.product.mapper.ProductMapper
+import com.harera.product.mapper.ProductResponse
+import com.harera.product.repository.ProductRepository
+import com.harera.product.request.PostProductRequest
+import com.harera.product.response.PostProductResponse
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
-import java.util.*
+import reactor.core.publisher.Mono
 
 
-@Service("productService")
-class ProductServiceImpl : ProductService {
+@Service
+class ProductServiceImpl(
+    private val productRepository: ProductRepository,
+) : ProductService {
 
-    @Autowired
-    private lateinit var productRepository : ProductRepository
+    override fun getProducts(page: Int, pageSize: Int): Mono<List<Product>> = Mono.fromCallable {
+        productRepository.getProducts(Pageable.ofSize(pageSize).withPage(page)).map {
+            ProductMapper.map(it)
+        }
+    }
 
-    override fun getProducts(page: Int, pageSize: Int) : List<Product> =
-        productRepository.findAll(Pageable.ofSize(pageSize).withPage(page - 1)).toList()
+    override fun getProducts(category: Long, page: Int, pageSize: Int): Mono<List<Product>> = Mono.fromCallable {
+        productRepository.getCategoryProducts(category, Pageable.ofSize(pageSize).withPage(page)).map {
+            ProductMapper.map(it)
+        }
+    }
 
-    override fun getProducts(category: String) : List<Product> =
-        productRepository.findByCategoryName(category)
+    override fun getProduct(productId: Long): Mono<Product> = Mono.fromCallable {
+        productRepository.getProduct(productId).let {
+            ProductMapper.map(it)
+        }
+    }
 
-    override fun getProduct(productId : Int) : Optional<Product> =
-        productRepository.findById(productId)
+    override fun insertProduct(postProductRequest: PostProductRequest): Mono<PostProductResponse> = Mono.fromCallable {
+        val productEntity = ProductMapper.map(postProductRequest)
 
-    override fun insertProduct(product: Product) : Int =
-        productRepository.saveAndFlush(product).productId
+        productRepository.save(productEntity).let {
+            ProductResponse.map(it)
+        }
+    }
 }
